@@ -1,0 +1,6 @@
+[submodule "YOLOv3"]
+	path = YOLOv3
+	url = https://github.com/xiaochus/YOLOv3.git
+[submodule "deep_sort"]
+	path = deep_sort
+	url = https://github.com/nwojke/deep_sort.git

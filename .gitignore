@@ -1,0 +1,8 @@
+# Python stuff
+/__pycache__
+/venv
+/.python-version
+
+# Misc
+/.vscode
+.DS_Store
