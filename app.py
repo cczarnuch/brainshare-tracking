@@ -110,20 +110,24 @@ def tracking(video, yolo, all_classes):
 
 
 # %%
-yolo = YOLO(0.6, 0.5, 'YOLOv3/data/yolo.h5')
+yolo = YOLO(0.6, 0.5, 'YOLOv3/data/yolo.h5') # Initialize yolo model
 file = 'YOLOv3/data/coco_classes.txt'
 all_classes = get_classes(file)
 
+# Tracker parameters:
+    # max_cosine_distance: How far away can the current tracked box be from the previous? Scaled
+    # nn_budget: limit the size of the neural network if on lower-end hardware
+    # nms_max_overlap: When performing non-max suppression, how much overlap is allowed between two boxes
 max_cosine_distance = 0.5
 nn_budget = None
 nms_max_overlap = 1.0
 
 model_filename = 'deep_sort/resources/networks/mars-small128.pb'
-encoder = generate_detections.create_box_encoder(model_filename, batch_size=1)
-metric = nn_matching.NearestNeighborDistanceMetric("cosine", max_cosine_distance, nn_budget)
+encoder = generate_detections.create_box_encoder(model_filename, batch_size=1) # Encoder used to generate features for given bounding boxes
+metric = nn_matching.NearestNeighborDistanceMetric("cosine", max_cosine_distance, nn_budget) # Metric to calculate which bounding box relates to which track
 tracker = Tracker(metric)
 
 
 # detect videos one at a time in videos/test folder    
-video = 'library1.mp4'
+video = 'MOT16-14-raw.mp4'
 tracking(video, yolo, all_classes)
